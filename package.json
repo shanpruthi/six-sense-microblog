@@ -1,7 +1,14 @@
 {
-    "name": "10kcblog",
-    "version": "1.0.0",
-    "dependencies": {
-        "express": "~4.14.0"
-    }
+  "name": "10kcblog",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel -d lib"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "~4.14.0",
+    "lodash": "^4.15.0",
+    "mongoose": "^4.5.10"
+  },
+  "devDependencies": {}
 }
