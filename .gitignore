@@ -10,3 +10,4 @@
 
 # Project-specific stuff
 node_modules/
+bower_components/

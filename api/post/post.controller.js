@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const utils = require('../common/utils');
 
 const Post = require('./post.model');
 
@@ -15,12 +16,6 @@ const DeletePostFields = [
     'id'
 ];
 
-function extractFields(body, fields) {
-    return new Promise((resolve, reject) => {
-        resolve(_.pick(body, fields));
-    });
-}
-
 function createPostInDB(body) {
     const post = new Post(body);
     return post.save();
@@ -31,7 +26,9 @@ function deletePostInDB(body) {
 }
 
 PostController.createPost = function (req, res, next) {
-    extractFields(req.body.data, CreatePostFields)
+    const data = req.body.data;
+
+    utils.extractFields(data, CreatePostFields)
         .then(createPostInDB)
         .then((post) => {
             res.status(201).send({
@@ -54,7 +51,9 @@ PostController.createPost = function (req, res, next) {
 };
 
 PostController.deletePost = function (req, res, next) {
-    extractFields(req.body.data, DeletePostFields)
+    const data = req.body.data;
+
+    utils.extractFields(data, DeletePostFields)
         .then(deletePostInDB)
         .then((post) => {
             res.status(200).send({
