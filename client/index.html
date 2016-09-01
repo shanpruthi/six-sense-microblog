@@ -2,19 +2,34 @@
 <html lang="en" ng-app="blog">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>10KWords</title>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
-<body>
+<body ng-controller="MainController as blog">
 <div class="container">
-    <h1>Blog</h1>
+    <h1>Ten Thousand Words</h1>
+    <nav>
+        <ul class="nav nav-tabs">
+            <li><a ui-sref="login">Sign In/Sign Up</a></li>
+            <li><a  ng-class="{hidden : !(user.isSignedIn) }" ui-sref="latest">Latest</a></li>
+            <li><a  ng-class="{hidden : !(user.isSignedIn) }" ui-sref="post">Post Something</a></li>
+        </ul>
+    </nav>
+
+    <div ui-view></div>
 
 </div>
 </body>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
 
 <script src="app.js"></script>
 </html>

@@ -80,24 +80,19 @@ AuthController.register = function (req, res, next) {
     // USER: password
     // PASS: username
 
-    const testUser = {
-        username: "password",
-        password: "username"
-    };
-
     // let data = req.body.data;
-    let data = testUser;
+    let data = req.body.data;
 
     utils.extractFields(data, CreateUserFields)
         // .then(hashPassword)
         .then(createUserInDB)
         .then((user) => {
             res.status(201).send({
-                data: [{
+                data: {
                     id: user.id,
                     username: user.username,
                     created_at: user.created_at
-                }]
+                }
             });
         })
         .catch((err) => {
@@ -112,16 +107,15 @@ AuthController.register = function (req, res, next) {
 
 AuthController.login = function (req, res, next) {
     const data = req.body.data;
-
     utils.extractFields(data, LoginUserFields)
         // .then(hashPassword)
         .then(verifyUserInDB)
         .then(generateJWT)
         .then((token) => {
-            res.status(200).send({
-                data: [{
+            res.status(200).json({
+                data: {
                     token: token
-                }]
+                }
             });
         })
         .catch((err) => {

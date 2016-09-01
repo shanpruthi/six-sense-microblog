@@ -25,6 +25,19 @@ function deletePostInDB(body) {
     return Post.findByIdAndRemove(body.id);
 }
 
+function getPostsInDB() {
+    return new Promise((resolve, reject) => {
+        const query = Post.find({});
+        query.exec((err, posts) => {
+            if (posts) {
+                resolve(posts);
+            } else {
+                reject("Posts not found in database");
+            }
+        });
+    });
+}
+
 PostController.createPost = function (req, res, next) {
     const data = req.body.data;
 
@@ -32,10 +45,10 @@ PostController.createPost = function (req, res, next) {
         .then(createPostInDB)
         .then((post) => {
             res.status(201).send({
-                data: [{
+                data: {
                     id: post.id,
                     created_at: post.created_at
-                }]
+                }
             });
         })
         .catch((err) => {
@@ -46,21 +59,21 @@ PostController.createPost = function (req, res, next) {
                 }]
             })
         });
-
-    next();
 };
 
 PostController.deletePost = function (req, res, next) {
-    const data = req.body.data;
+    const data = {
+        id: req.params.id
+    };
 
+    console.log(data);
     utils.extractFields(data, DeletePostFields)
         .then(deletePostInDB)
         .then((post) => {
             res.status(200).send({
-                data: [{
-                    id: post.id,
-                    created_at: post.created_at
-                }]
+                data: {
+                    id: post._id
+                }
             });
         })
         .catch((err) => {
@@ -71,8 +84,23 @@ PostController.deletePost = function (req, res, next) {
                 }]
             })
         });
+};
 
-    next();
+PostController.getAllPosts = function (req, res, next) {
+    getPostsInDB()
+        .then((posts) => {
+            res.status(200).send({
+                data: posts
+            })
+        })
+        .catch((err) => {
+            res.status(404).send({
+                errors: [{
+                    title: "Posts could not be found",
+                    detail: err
+                }]
+            })
+        });
 };
 
 module.exports = PostController;
