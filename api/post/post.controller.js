@@ -66,7 +66,6 @@ PostController.deletePost = function (req, res, next) {
         id: req.params.id
     };
 
-    console.log(data);
     utils.extractFields(data, DeletePostFields)
         .then(deletePostInDB)
         .then((post) => {

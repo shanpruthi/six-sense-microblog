@@ -5,31 +5,36 @@
     <title>10KWords</title>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/stylesheet.css" />
+
 </head>
-<body ng-controller="MainController as blog">
+<body>
 <div class="container">
     <h1>Ten Thousand Words</h1>
     <nav>
         <ul class="nav nav-tabs">
             <li><a ui-sref="login">Sign In/Sign Up</a></li>
-            <li><a  ng-class="{hidden : !(user.isSignedIn) }" ui-sref="latest">Latest</a></li>
-            <li><a  ng-class="{hidden : !(user.isSignedIn) }" ui-sref="post">Post Something</a></li>
+            <li><a  ng-class="{hidden : !(isSignedIn) }" ui-sref="latest">Latest</a></li>
+            <li><a  ng-class="{hidden : !(isSignedIn) }" ui-sref="post">Post Something</a></li>
         </ul>
     </nav>
 
     <div ui-view></div>
 
 </div>
-</body>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
 
 <script src="app.js"></script>
+
+<script src="/components/posts/postsService.js"></script>
+<script src="/components/posts/postsController.js"></script>
+<script src="/components/users/usersService.js"></script>
+<script src="/components/users/usersController.js"></script>
+
+
+</body>
+
 </html>

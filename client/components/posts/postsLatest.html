@@ -1,4 +1,4 @@
-<div ng-class="{hidden : !(user.isSignedIn) }"> 
+<div ng-controller="PostController" ng-class="{hidden : !(isSignedIn) }"> 
     <div ng-repeat="post in posts">
         <h3>  {{post.title | limitTo : 30}}</h3> 
         <p> {{post.content | limitTo : 160 }} </p> 

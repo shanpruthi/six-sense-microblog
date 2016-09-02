@@ -1,11 +1,10 @@
-<div>  
-
-    <div ng-show="user.isSignedIn">
-        <p>You are now signed in. Welcome {{currentUser}} </p>
+<div ng-controller="UsersController">   
+    <div ng-show="isSignedIn">
+        <p>You are now signed in. Welcome!</p>
         <button ng-click="signOut()">Press here to sign out</button>
     </div>
 
-    <div ng-hide="user.isSignedIn">
+    <div ng-hide="isSignedIn">
         <div>
             <p>{{authError}}</p>
         </div>
