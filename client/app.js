@@ -1,6 +1,6 @@
-angular.module('blog', ['ui.router'])
+angular.module('blog', ['ui.router', 'satellizer'])
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 
         $urlRouterProvider.otherwise('/login')
 
@@ -17,5 +17,5 @@ angular.module('blog', ['ui.router'])
                 url: '/post',
                 templateUrl: '/components/posts/postsAdd.html'
             })
-    }
-);
+
+    });

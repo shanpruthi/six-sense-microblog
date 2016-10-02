@@ -1,0 +1,13 @@
+version: '2'
+services:
+    web:
+        build: .
+        links:
+            - db
+        ports:
+            - "3000:3000"
+        command: "node app.js"
+    db:
+        image: mongo
+        ports:
+            - "27017:27017"

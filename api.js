@@ -11,23 +11,7 @@ const userRouter = require('./api/user/auth.router.js');
 apiRouter.use((req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-    if (token) {
-        jwt.verify(token, config.secret, (err, decoded) => {
-            if (err) {
-                return res.status(401).send({
-                    errors: [
-                        {
-                            title: 'Invalid token',
-                            detail: 'Valid JSON Web Token required to communicate with API'
-                        }
-                    ]
-                })
-            } else {
-                req.decoded = decoded;
-                next();
-            }
-        })
-    } else {
+    if (!token) {
         return res.status(403).send({
             errors: [
                 {
@@ -37,6 +21,22 @@ apiRouter.use((req, res, next) => {
             ]
         })
     }
+
+    jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+            return res.status(401).send({
+                errors: [
+                    {
+                        title: 'Invalid token',
+                        detail: 'Valid JSON Web Token required to communicate with API'
+                    }
+                ]
+            })
+        }
+
+        req.decoded = decoded;
+        next();
+    })
 });
 
 apiRouter.use('/user', userRouter);
