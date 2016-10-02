@@ -35,8 +35,6 @@ angular.module('blog')
                 data: tempUser
             })
                 .then((response) => {
-                    //const data = response.data;
-                    //$scope.user.username = data.username;
                     $scope.authError = 'Account created, you can now sign in';
                 })
         };
@@ -46,4 +44,4 @@ angular.module('blog')
         };
 
     }
-]);
+    ]);

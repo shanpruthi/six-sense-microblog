@@ -2,8 +2,6 @@ angular.module('blog')
 
     .controller('PostController', ['$scope', '$rootScope', 'Posts', function ($scope, $rootScope, Posts) {
 
-        // $scope.user.isSignedIn should exist here as well
-
         $scope.post = {};
         $scope.postMessage = '';
 
@@ -12,7 +10,7 @@ angular.module('blog')
         });
 
         $scope.addPost = function () {
-            if ($scope.isSignedIn === false) {
+            if ($rootScope.isSignedIn == false) {
                 $scope.postMessage = 'You need to sign in to post something';
             } else {
                 let tempPost = {
@@ -20,7 +18,8 @@ angular.module('blog')
                     content: $scope.post.content,
                     image: 1010
                 }
-                Posts.post({ data: tempPost})
+                Posts
+                    .post({ data: tempPost})
                     .then((response) => {
                         Posts.get()
                             .then((response) => {
@@ -29,25 +28,24 @@ angular.module('blog')
                         $scope.post = {};
                         $scope.postMessage = 'Post added!';
                     });
+
+
             }
         };
 
         $scope.deletePost = function (post) {
-            if ($scope.isSignedIn === false) {
-                $scope.postMessage = 'You need to sign in to delete';
-            } else {
-                Posts.delete(post)
-                    .then((response) => {
-                        let index = $scope.posts.indexOf(post);
-                        if (index > -1) {
-                            $scope.posts.splice(index, 1);
-                        }
-                        Posts.get().then((response) => {
-                            $scope.posts = response.data.data;
-                        });
-                    })
-            }
+            Posts.delete(post)
+                .then((response) => {
+                    let index = $scope.posts.indexOf(post);
+                    if (index > -1) {
+                        $scope.posts.splice(index, 1);
+                    }
+                    Posts.get().then((response) => {
+                        $scope.posts = response.data.data;
+                    });
+                })
         };
 
     }
 ]);
+q
