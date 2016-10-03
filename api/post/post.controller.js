@@ -27,7 +27,9 @@ function deletePostInDB(body) {
 
 function getPostsInDB() {
     return new Promise((resolve, reject) => {
-        const query = Post.find({});
+        const query = Post.find({})
+            .setOptions({cacheOptions: {cache: false}})
+            .lean();
         query.exec((err, posts) => {
             if (posts) {
                 resolve(posts);

@@ -1,5 +1,12 @@
 # Blog App
 
-Created by Karan and Shan.
+MEAN Stack App with Redis Caching
 
-10KC Tech Stack
+## Features
+
+JSON Web Tokens
+
+Redis Caching
+
+## Quick Start
+

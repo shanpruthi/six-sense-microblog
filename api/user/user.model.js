@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const db = require('../common/db');
+const redis = require('redis');
+const redisClient = redis.createClient();
+
+const MongooseRedis = require('mongoose-with-redis');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -24,6 +28,13 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
+const cacheOptions = {
+    cache: true,
+    expires: 1440,
+    prefix: 'RedisCache'
+};
+MongooseRedis(mongoose, redisClient, cacheOptions);
 
 const User = db.model('User', UserSchema);
 

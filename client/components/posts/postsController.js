@@ -16,8 +16,7 @@ angular.module('blog')
                 let tempPost = {
                     title: $scope.post.title,
                     content: $scope.post.content,
-                    image: 1010
-                }
+                };
                 Posts
                     .post({ data: tempPost})
                     .then((response) => {
@@ -48,4 +47,3 @@ angular.module('blog')
 
     }
 ]);
-q

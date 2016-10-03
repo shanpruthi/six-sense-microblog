@@ -32,20 +32,15 @@ function verifyUserInDB(user) {
     return new Promise((resolve, reject) => {
         const query = User.findOne({ 'username': user.username });
         query.select('username password');
-        query.exec((err, userInDB) => {
+        query.lean().exec((err, userInDB) => {
             if (userInDB) {
-                if (user.password != userInDB.password) {
-                    reject("Passwords do not match");
-                } else {
-                    resolve(user);
-                }
-                // bcrypt.compare(user.password, userInDB.password, (err, result) => {
-                //     if (result) {
-                //         resolve(user);
-                //     } else {
-                //         reject("Passwords do not match");
-                //     }
-                // });
+                bcrypt.compare(user.password, userInDB.password, (err, result) => {
+                    if (result) {
+                        resolve(user);
+                    } else {
+                        reject("Passwords do not match");
+                    }
+                });
             } else {
                 reject("User not found in database");
             }
@@ -76,15 +71,10 @@ function generateJWT(user) {
 }
 
 AuthController.register = function (req, res, next) {
-    // All this will do is create a user with the following credentials:
-    // USER: password
-    // PASS: username
-
-    // let data = req.body.data;
     let data = req.body.data;
 
     utils.extractFields(data, CreateUserFields)
-        // .then(hashPassword)
+        .then(hashPassword)
         .then(createUserInDB)
         .then((user) => {
             res.status(201).send({

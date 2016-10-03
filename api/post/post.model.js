@@ -14,10 +14,9 @@ const PostSchema = new mongoose.Schema({
         type: String,
         max: [160, 'Content of post cannot exceed 160 characters']
     },
-    author: ObjectId,
-    image: {
-        data: Buffer,
-        type: String
+    upvotes: {
+        type: Number,
+        default: 0
     },
     created_at: {
         type: Date,
