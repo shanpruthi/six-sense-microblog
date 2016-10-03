@@ -1,5 +1,5 @@
 <div ng-controller="PostController" ng-class="{hidden : !(isSignedIn) }"> 
-    <div ng-repeat="post in posts | orderBy: '-created_at'">
+    <div ng-repeat="post in posts | orderBy: '-created_at' | limitTo: 30">
         <h3>  {{post.title | limitTo : 30}}</h3> 
         <p> {{post.content | limitTo : 160 }} </p> 
         <!--<a ng-click="deletePost(post)">Delete</a> -->

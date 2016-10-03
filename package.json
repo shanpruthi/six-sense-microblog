@@ -1,5 +1,5 @@
 {
-  "name": "10kcblog",
+  "name": "6ixSense",
   "version": "1.0.0",
   "scripts": {
     "build": "babel -d lib"
