@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="blog">
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
     <meta charset="UTF-8">
     <title>6ixSense</title>
-
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/stylesheet.css" />
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="client/assets/images/favicon.ico">
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div class="container">
-    <h1>Six Sense</h1>
-    <nav>
-        <ul class="nav nav-tabs">
-            <li><a ui-sref="login">Sign In/Sign Up</a></li>
-            <li><a  ng-class="{hidden : !(isSignedIn) }" ui-sref="latest">Latest</a></li>
-            <li><a  ng-class="{hidden : !(isSignedIn) }" ui-sref="post">Post Something</a></li>
-        </ul>
-    </nav>
-
-    <div ui-view></div>
-
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a ui-sref="login" class="btn btn-default btn-sm activeTab" onclick="closeNav()">Sign In/Sign Up</a>
+    <a class="btn btn-default btn-sm" ng-class="{hidden : !(isSignedIn) }" ui-sref="latest" onclick="closeNav()">Latest</a>
+    <a class="btn btn-default btn-sm" ng-class="{hidden : !(isSignedIn) }" ui-sref="post" onclick="closeNav()">Post Something</a>
+    <a ui-sref="about" class="btn btn-default btn-sm" onclick="closeNav()">About</a>
 </div>
-
+<div class="container menuIcon">
+<span onclick="openNav()"><md-icon><i class="material-icons openMenu">menu</i></md-icon></span>
+</div>
+<div id="main">
+<div class="container ">
+    <h1 class="header">Six Sense</h1>
+    <div ui-view></div>
+</div>
+<br><br><br>
+<div class="footer fadeInDown">
+    <div class="icons">
+    <md-button><md-icon><i class="material-icons">accessibility</i></md-icon></md-button>
+    <md-button><md-icon><i class="material-icons">accessibility</i></md-icon></md-button>
+    </div>
+</div>
+</div>
+<script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
-
 <script src="app.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+<script src="bower_components/jquery-bridget/jquery-bridget.js"></script>
+<script src="bower_components/ev-emitter/ev-emitter.js"></script>
+<script src="bower_components/desandro-matches-selector/matches-selector.js"></script>
+<script src="bower_components/fizzy-ui-utils/utils.js"></script>
+<script src="bower_components/get-size/get-size.js"></script>
+<script src="bower_components/outlayer/item.js"></script>
+<script src="bower_components/outlayer/outlayer.js"></script>
+<script src="bower_components/masonry/masonry.js"></script>
+<script src="bower_components/imagesloaded/imagesloaded.js"></script>
+<script src="bower_components/angular-masonry/angular-masonry.js"></script>
 
 <script src="/components/posts/postsService.js"></script>
 <script src="/components/posts/postsController.js"></script>
 <script src="/components/users/usersService.js"></script>
 <script src="/components/users/usersController.js"></script>
+<script src="/components/about/aboutController.js"></script>
 
+<script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
 
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
 </body>
 
 </html>

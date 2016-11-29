@@ -1,8 +1,16 @@
-<div ng-controller="PostController" ng-class="{hidden : !(isSignedIn) }"> 
-    <div ng-repeat="post in posts | orderBy: '-created_at' | limitTo: 30">
-        <h3>  {{post.title | limitTo : 30}}</h3> 
-        <p> {{post.content | limitTo : 160 }} </p> 
-        <!--<a ng-click="deletePost(post)">Delete</a> -->
-        <br>
+<div class="content" ng-controller="PostController" ng-class="{hidden : !(isSignedIn) }"> 
+    <div ng-if="posts.length">
+    <div masonry="{ transitionDuration: '0.5s'}" column-width="300" preserve-order>
+        <div class="masonry-brick contentBlock" ng-repeat="post in posts | orderBy: '-created_at' | limitTo: 30">
+            <div class="borderBox">
+            <h3 class="titleText" style="margin-top:0px;">  {{post.title | limitTo : 30}}</h3> 
+            <p class="bodyText"> {{post.content | limitTo : 160 }} </p> 
+            <a class="closeButton" ng-click="deletePost(post)">&times;</a> 
+            </div>
+        </div>
+    </div>
+    </div>
+    <div ng-if="!posts.length">
+        <h3>No one has posted yet.</h3>
     </div>
 </div>

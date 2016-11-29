@@ -3,6 +3,9 @@ angular.module('blog')
 
         $scope.authError = '';
         $rootScope.isSignedIn;
+        if (sessionStorage.getItem('token')) {
+            $rootScope.isSignedIn = true;
+        }
         $scope.user = {};
 
         $scope.verifyUser = function () {
@@ -19,10 +22,14 @@ angular.module('blog')
                     $scope.user.username = '';
                     $scope.user.password = '';
                     $rootScope.isSignedIn = true;
-                    sessionStorage.token = data.data.token;
+                    sessionStorage.setItem('token', data.data.token);
                 })
                 .catch((response) => {
                     $scope.authError = 'Incorrect username or password';
+                    setTimeout(function() {
+                        $scope.authError = '';
+                        console.log('test');
+                    }, 3000);
                 })
         };
 
@@ -40,6 +47,7 @@ angular.module('blog')
         };
 
         $scope.signOut = function () {
+            sessionStorage.removeItem('token');
             $rootScope.isSignedIn = false;
         };
 

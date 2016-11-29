@@ -9,7 +9,8 @@ MEAN Stack App with Redis Caching and JWT Authentication
 - JSON Web Tokens
 - Bcrypt Storage Hashing
 - Redis Caching
-- Docker (WIP)
+- Docker
+- Session Storage
 
 ## Quick Start
 

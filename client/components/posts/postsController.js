@@ -4,6 +4,9 @@ angular.module('blog')
 
         $scope.post = {};
         $scope.postMessage = '';
+        if (sessionStorage.getItem('token')) {
+            $rootScope.isSignedIn = true;
+        }
 
         Posts.get().then((response) => {
             $scope.posts = response.data.data;

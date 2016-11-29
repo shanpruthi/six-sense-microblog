@@ -1,4 +1,4 @@
-angular.module('blog', ['ui.router', 'satellizer'])
+angular.module('blog', ['ui.router', 'satellizer', 'wu.masonry'])
 
     .config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 
@@ -17,5 +17,8 @@ angular.module('blog', ['ui.router', 'satellizer'])
                 url: '/post',
                 templateUrl: '/components/posts/postsAdd.html'
             })
-
+            .state('about', {
+                url: '/about',
+                templateUrl: '/components/about/about.html'
+            })
     });
