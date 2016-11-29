@@ -12,7 +12,8 @@
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.15.0",
     "mongoose": "^4.5.10",
-    "mongoose-with-redis": "^0.1.1"
+    "mongoose-with-redis": "^0.1.1",
+    "pm2": "^2.1.6"
   },
   "devDependencies": {}
 }
