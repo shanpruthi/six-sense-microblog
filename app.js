@@ -17,5 +17,5 @@ app.use('/', express.static(__dirname + '/client'));
 app.use('/api/auth', authRouter);
 app.use('/api', apiRouter);
 
-app.listen(3000);
+app.listen(8080);
 console.log('App is running');
