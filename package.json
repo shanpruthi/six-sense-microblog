@@ -13,7 +13,8 @@
     "lodash": "^4.15.0",
     "mongoose": "^4.5.10",
     "mongoose-with-redis": "^0.1.1",
-    "pm2": "^2.1.6"
+    "pm2": "^2.1.6",
+    "redis": "^2.6.3"
   },
   "devDependencies": {}
 }
