@@ -1,4 +1,4 @@
-# six sense microblog
+# six sense microblog at http://6ixsense.net
 
 A Microblog that lets users post anonymously to a collective feed.
 
